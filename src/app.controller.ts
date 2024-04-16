@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Product } from './types/global';
+import { Address, Product } from './types/global';
 
 @Controller('api/v1')
 export class AppController {
@@ -14,5 +14,20 @@ export class AppController {
   @Get('products')
   getProducts(): Array<Product> {
     return this.appService.getProducts();
+  }
+
+  @Get('product/:id')
+  getProduct(@Param('id') id: number) {
+    return this.appService.getProduct(id);
+  }
+
+  @Get('address')
+  getAddress(): Address[] {
+    return this.appService.getAddress();
+  }
+
+  @Get('cart-items')
+  getCartProducts() {
+    return this.appService.getCartItems();
   }
 }
